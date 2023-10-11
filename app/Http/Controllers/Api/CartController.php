@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,12 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cart = Cart::where('user_id', $request->user_id)->get();
+        return new PostResource(true, "Data berhasil di dapat", $cart);
+
+
     }
 
     /**
@@ -36,7 +40,20 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $where = [
+            'user_id' => $request->user_id,
+            'product_id' => $request->product_id,
+            'quantity' => 1
+        ];
+
+        $cart = Cart::create($where);
+
+        if($cart){
+            return new PostResource(true, "Data berhasil di tambahkan", $cart);
+        }else{
+            return new PostResource(false, "Data gagal di tambahkan", $cart);
+        }
+
     }
 
     /**

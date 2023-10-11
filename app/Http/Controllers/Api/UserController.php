@@ -29,11 +29,11 @@ class UserController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
-        
+
         if($user){
             return new PostResource(true, "Registrasi berhasil", $user);
         }else{
-            return new PostResource(true, "Registrasi gagal", []);
+            return new PostResource(false, "Registrasi gagal", []);
         }
     }
 
