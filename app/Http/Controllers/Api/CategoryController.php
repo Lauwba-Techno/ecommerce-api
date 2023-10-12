@@ -12,12 +12,12 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return new PostResource(true, "Data berhasil di dapat", $category);
+        return new PostResource(true, "Data berhasil didapat", $category);
 
     }
 
     public function show(Category $category)
     {
-        return new PostResource(true, "Data berhasil di dapat", $category);
+        return new PostResource(true, "Data berhasil didapat", $category);
     }
 }

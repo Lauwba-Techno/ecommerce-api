@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\CarouselController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FeedController;
 use App\Http\Controllers\Api\HelpController;
@@ -56,6 +57,11 @@ Route::get('subcategory/{subcategory}', [SubcategoryController::class, 'show']);
 Route::get('product', [ProductController::class, 'index']);
 Route::get('product/{product}', [ProductController::class, 'show']);
 
-// cart 
-// .......
-// .......
+// cart
+Route::get('cart', [CartController::class, 'index']);
+Route::get('cart/{cart}', [CartController::class, 'show']);
+Route::post('cart-add', [CartController::class, 'store']);
+Route::post('cart-update/{cart}', [CartController::class, 'update']);
+Route::get('cart-delete/{cart}', [CartController::class, 'destroy']);
+
+

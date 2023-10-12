@@ -5,82 +5,104 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $category = Category::all();
+        return view('admin.category.index', compact('category'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required',
+            'category_desc' => 'required',
+            'category_image' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        $category_image = $request->file('category_image');
+        if ($path = Storage::putFile('public/categories', $category_image)) {
+            $category = Category::create([
+                'category_name' => $request->category_name,
+                'category_desc' => $request->category_desc,
+                'category_image' => $path
+            ]);
+
+            if ($category) {
+                return Redirect()->to('/category')->withSuccess('Data berhasil ditambah');
+            } else {
+                return back()->withInput()->withErrors('Data gagal ditambah');
+            }
+        } else {
+            return back()->withInput()->withErrors(['error' => ['Image tidak bisa di simpan']]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Category $category)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required',
+            'category_desc' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        $data = [
+            'category_name' => $request->category_name,
+            'category_desc' => $request->category_desc,
+        ];
+
+        if ($request->hasFile('category_image')) {
+            if (Storage::get($category->category_image)) {
+                Storage::delete($category->category_image);
+            }
+
+            $category_image = $request->file('category_image');
+            $path = Storage::putFile('public/categories', $category_image);
+            $data['category_image'] = $path;
+        }
+
+        $category->update($data);
+
+        if ($category) {
+            return Redirect()->to('/category')->withSuccess('Data berhasil Diupdate');
+        } else {
+            return back()->withErrors('Data gagal Diupdate');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Category $category)
     {
-        //
+        if (Storage::get($category->category_image)) {
+            Storage::delete($category->category_image);
+        }
+
+        $category->delete();
+
+        if ($category) {
+            return back()->withSuccess('Data berhasil Dihapus');
+        } else {
+            return back()->withErrors('Data gagal Dihapus');
+        }
     }
 }

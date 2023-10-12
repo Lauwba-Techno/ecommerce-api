@@ -12,6 +12,6 @@ class FeedController extends Controller
     public function index()
     {
         $feed = Feed::all();
-        return new PostResource(true, "Data berhasil di dapat", $feed);
+        return new PostResource(true, "Data berhasil didapat", $feed);
     }
 }

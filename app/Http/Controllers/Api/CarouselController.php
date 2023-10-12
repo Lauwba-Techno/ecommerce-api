@@ -12,6 +12,6 @@ class CarouselController extends Controller
     public function index()
     {
         $carousel = Carousel::all();
-        return new PostResource(true, "Data berhasil di dapat", $carousel);
+        return new PostResource(true, "Data berhasil didapat", $carousel);
     }
 }

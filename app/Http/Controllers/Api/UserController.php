@@ -24,9 +24,8 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'fullname' => $request->fullname,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
@@ -48,7 +47,7 @@ class UserController extends Controller
             return new PostResource(false, "Login gagal", []);
         }
 
-        if ($user = User::where('email', $request->email)->first()) {
+        if ($user = User::where('username', $request->username)->first()) {
             if (!Hash::check($request->password, $user->password)) {
                 return new PostResource(false, "Invalid Password.", $user);
             }

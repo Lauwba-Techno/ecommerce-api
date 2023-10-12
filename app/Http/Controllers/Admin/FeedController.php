@@ -5,82 +5,109 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Feed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class FeedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $feed = Feed::all();
+        return view('admin.feed.index', compact('feed'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.feed.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'feed_title' => 'required',
+            'feed_category' => 'required',
+            'feed_desc' => 'required',
+            'feed_image' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        $feed_image = $request->file('feed_image');
+        if($path = Storage::putFile('public/feeds', $feed_image)){
+            $feed = Feed::create([
+                'feed_title' => $request->feed_title,
+                'feed_category' => $request->feed_category,
+                'feed_desc' => $request->feed_desc,
+                'feed_image' => $path
+            ]);
+
+            if ($feed) {
+                return Redirect()->to('/feed')->withSuccess('Data berhasil ditambah');
+            } else {
+                return back()->withInput()->withErrors('Data gagal ditambah');
+            }
+        }else{
+            return back()->withInput()->withErrors(['error'=> ['Image tidak bisa di simpan']]);
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Feed $feed)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Feed $feed)
     {
-        //
+        return view('admin.feed.edit', compact('feed'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Feed $feed)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'feed_title' => 'required',
+            'feed_category' => 'required',
+            'feed_desc' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        $data = [
+            'feed_title' => $request->feed_title,
+            'feed_category' => $request->feed_category,
+            'feed_desc' => $request->feed_desc,
+        ];
+
+        if($request->hasFile('feed_image')){
+            if (Storage::get($feed->feed_image)) {
+                Storage::delete($feed->feed_image);
+            }
+
+            $feed_image = $request->file('feed_image');
+            $path = Storage::putFile('public/feeds', $feed_image);
+            $data['feed_image'] = $path;
+        }
+
+        $feed->update($data);
+
+        if ($feed) {
+            return Redirect()->to('/feed')->withSuccess('Data berhasil Diupdate');
+        } else {
+            return back()->withErrors('Data gagal Diupdate');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Feed $feed)
     {
-        //
+        if (Storage::get($feed->feed_image)) {
+            Storage::delete($feed->feed_image);
+        }
+
+        $feed->delete();
+
+        if ($feed) {
+            return back()->withSuccess('Data berhasil Dihapus');
+        } else {
+            return back()->withErrors('Data gagal Dihapus');
+        }
     }
 }

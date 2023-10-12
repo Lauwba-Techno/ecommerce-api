@@ -5,82 +5,91 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CarouselController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $carousel = Carousel::all();
+        return view('admin.carousel.index', compact('carousel'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.carousel.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'carousel_image' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        $carousel_image = $request->file('carousel_image');
+        if ($path = Storage::putFile('public/carousels', $carousel_image)) {
+            $carousel = Carousel::create([
+                'carousel_image' => $path
+            ]);
+
+            if ($carousel) {
+                return Redirect()->to('/carousel')->withSuccess('Data berhasil ditambah');
+            } else {
+                return back()->withInput()->withErrors('Data gagal ditambah');
+            }
+        } else {
+            return back()->withInput()->withErrors(['error' => ['Image tidak bisa di simpan']]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Carousel  $carousel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carousel $carousel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Carousel  $carousel
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Carousel $carousel)
     {
-        //
+        return view('admin.carousel.edit', compact('carousel'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Carousel  $carousel
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Carousel $carousel)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'carousel_image' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator->messages());
+        }
+
+        if (Storage::get($carousel->carousel_image)) {
+            Storage::delete($carousel->carousel_image);
+        }
+
+        $carousel_image = $request->file('carousel_image');
+        $path = Storage::putFile('public/carousels', $carousel_image);
+
+        $carousel->update(['carousel_image' => $path]);
+
+        if ($carousel) {
+            return Redirect()->to('/carousel')->withSuccess('Data berhasil Diupdate');
+        } else {
+            return back()->withErrors('Data gagal Diupdate');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Carousel  $carousel
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Carousel $carousel)
     {
-        //
+        if (Storage::get($carousel->carousel_image)) {
+            Storage::delete($carousel->carousel_image);
+        }
+
+        $carousel->delete();
+
+        if ($carousel) {
+            return back()->withSuccess('Data berhasil Dihapus');
+        } else {
+            return back()->withErrors('Data gagal Dihapus');
+        }
     }
 }

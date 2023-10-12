@@ -12,11 +12,11 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        return new PostResource(true, "Data berhasil di dapat", $product);
+        return new PostResource(true, "Data berhasil didapat", $product);
     }
 
     public function show(Product $product)
     {
-        return new PostResource(true, "Data berhasil di dapat", $product);
+        return new PostResource(true, "Data berhasil didapat", $product);
     }
 }

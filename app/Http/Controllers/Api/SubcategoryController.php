@@ -12,11 +12,11 @@ class SubcategoryController extends Controller
     public function index()
     {
         $subcategory = Subcategory::all();
-        return new PostResource(true, "Data berhasil di dapat", $subcategory);
+        return new PostResource(true, "Data berhasil didapat", $subcategory);
     }
 
     public function show(Subcategory $subcategory)
     {
-        return new PostResource(true, "Data berhasil di dapat", $subcategory);
+        return new PostResource(true, "Data berhasil didapat", $subcategory);
     }
 }

@@ -10,7 +10,7 @@ class About extends Model
     use HasFactory;
 
     protected $table = 'abouts';
-    protected $primaryKey = 'id_about';
+    protected $primaryKey = 'about_id';
     protected $fillable = [
         'app_name',
         'app_desc',
