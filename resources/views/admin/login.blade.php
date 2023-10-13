@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Ecommerce</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('startbootstrap') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,7 +36,8 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-flex align-items-center justify-content-center">
-                                <img src="{{ asset('startbootstrap') }}/img/kai.png" alt="{{ asset('startbootstrap') }}/img/kai.png">
+                                <img src="{{ asset('startbootstrap') }}/img/kai.png"
+                                    alt="{{ asset('startbootstrap') }}/img/kai.png">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -46,13 +47,13 @@
                                     <form class="user" action="/login" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="username" name="username" aria-describedby="emailHelp"
+                                            <input type="text" class="form-control form-control-user" id="username"
+                                                name="username" aria-describedby="emailHelp"
                                                 placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" id="password"
+                                                name="password" placeholder="Password">
                                         </div>
 
                                         <button class="btn btn-primary btn-user btn-block">
