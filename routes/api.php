@@ -33,7 +33,6 @@ Route::post('login', [UserController::class, 'Authentication']);
 
 // about
 Route::get('about', [AboutController::class, 'index']);
-Route::get('about/{about}', [AboutController::class, 'show']);
 
 // carousel
 Route::get('carousel', [CarouselController::class, 'index']);

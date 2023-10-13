@@ -11,12 +11,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $about = About::all();
-        return new PostResource(true, "Data berhasil didapat", $about);
-    }
-
-    public function show(About $about)
-    {
+        $about = About::first();
         return new PostResource(true, "Data berhasil didapat", $about);
     }
 }
