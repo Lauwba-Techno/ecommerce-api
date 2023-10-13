@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HelpController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,4 +90,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cart/{cart}', [CartController::class, 'show']);
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+});
+
+Route::get('/test', function () {
+    Artisan::call('storage:link');
+    Artisan::call('migrate:fresh', ['--seed' => true]);
+    $target = '/home/pkllauwb/project/ecommerce/public';
+    $shortcut = '/home/pkllauwb/public_html/ecommerce';
+    if (symlink($target, $shortcut)) {
+        return response()->json(['message' => 'storage link dan migrate berhasil']);
+    }
 });
