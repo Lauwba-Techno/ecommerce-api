@@ -92,12 +92,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/test', function () {
+Route::get('/generate', function () {
     Artisan::call('storage:link');
     Artisan::call('migrate:fresh', ['--seed' => true]);
-    $target = '/home/pkllauwb/project/ecommerce/public';
-    $shortcut = '/home/pkllauwb/public_html/ecommerce';
-    if (symlink($target, $shortcut)) {
-        return response()->json(['message' => 'storage link dan migrate berhasil']);
-    }
+    return response()->json(['message' => 'storage link dan migrate berhasil']);
 });
