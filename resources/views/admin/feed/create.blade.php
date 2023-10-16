@@ -2,6 +2,15 @@
 @section('content')
     <div class="container-fluid">
 
+        @if (session('errors'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('errors')->first() }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Feed</h1>
@@ -17,18 +26,18 @@
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user text-muted" id="feed_title"
-                            name="feed_title" placeholder="Nama Feed">
+                            name="feed_title" value="{{ old('feed_title') }}" placeholder="Nama Feed">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user text-muted" id="feed_category"
-                            name="feed_category" placeholder="Kategori Feed">
+                            name="feed_category" value="{{ old('feed_category') }}" placeholder="Kategori Feed">
                     </div>
                     <div class="form-group">
                         <input class="form-control" id="feed_image" name="feed_image" type="file">
                     </div>
                     <div class="form-group">
-                        <Textarea class="form-control text-muted" id="feed_desc" name="feed_desc" rows="5"
-                            placeholder="Deskripsi Feed"></Textarea>
+                        <Textarea class="form-control text-muted text-xs" id="feed_desc" name="feed_desc" rows="5"
+                            placeholder="Deskripsi Feed">{{ old('feed_desc') }}</Textarea>
                     </div>
                     <hr>
                     <button class="btn btn-facebook btn-user btn-block">

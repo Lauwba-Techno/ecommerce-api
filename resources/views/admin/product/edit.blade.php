@@ -2,6 +2,15 @@
 @section('content')
     <div class="container-fluid">
 
+        @if (session('errors'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('errors')->first() }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Produk</h1>
@@ -39,7 +48,7 @@
                         <input class="form-control" id="product_image" name="product_image" type="file">
                     </div>
                     <div class="form-group">
-                        <Textarea class="form-control text-muted" id="product_desc" name="product_desc" rows="5"
+                        <Textarea class="form-control text-muted text-xs" id="product_desc" name="product_desc" rows="5"
                             placeholder="Deskripsi Produk">{{ $product->product_desc }}</Textarea>
                     </div>
                     <hr>

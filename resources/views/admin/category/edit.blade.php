@@ -2,6 +2,15 @@
 @section('content')
     <div class="container-fluid">
 
+        @if (session('errors'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('errors')->first() }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Kategori</h1>
@@ -23,7 +32,7 @@
                         <input class="form-control" id="category_image" name="category_image" type="file">
                     </div>
                     <div class="form-group">
-                        <Textarea class="form-control text-muted" id="category_desc" name="category_desc" rows="5"
+                        <Textarea class="form-control text-muted text-xs" id="category_desc" name="category_desc" rows="5"
                             placeholder="Deskripsi Category">{{ $category->category_desc }}</Textarea>
                     </div>
                     <hr>

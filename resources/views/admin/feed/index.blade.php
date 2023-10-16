@@ -2,6 +2,15 @@
 @section('content')
     <div class="container-fluid">
 
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Feed</h1>
@@ -26,21 +35,22 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                       <tbody>
-                        @foreach ($feed as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->feed_title }}</td>
-                                <td>{{ $item->feed_category }}</td>
-                                <td>{{ Str::substr($item->feed_desc, 0, 100) }}...</td>
-                                <td><img src="{{ Storage::url($item->feed_image) }}" alt="{{ $item->feed_image }}" width="100px" height="100px"></td>
-                                <td>
-                                    <a href="/feed-edit/{{ $item->feed_id }}" class="btn btn-warning">Edit</a>
-                                    <a href="/feed-delete/{{ $item->feed_id }}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                       </tbody>
+                        <tbody>
+                            @foreach ($feed as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->feed_title }}</td>
+                                    <td>{{ $item->feed_category }}</td>
+                                    <td>{{ Str::substr($item->feed_desc, 0, 100) }}...</td>
+                                    <td><img src="{{ Storage::url($item->feed_image) }}" alt="{{ $item->feed_image }}"
+                                            width="100px" height="100px"></td>
+                                    <td>
+                                        <a href="/feed-edit/{{ $item->feed_id }}" class="btn btn-warning">Edit</a>
+                                        <a href="/feed-delete/{{ $item->feed_id }}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

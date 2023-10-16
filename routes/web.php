@@ -92,8 +92,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/generate', function () {
-    Artisan::call('storage:link');
-    Artisan::call('migrate:fresh', ['--seed' => true]);
-    return response()->json(['message' => 'storage link dan migrate berhasil']);
-});
+// Route::get('/generate', function () {
+//     Artisan::call('storage:link');
+//     Artisan::call('migrate:fresh', ['--seed' => true]);
+//     return response()->json(['message' => 'storage link dan migrate berhasil']);
+// });

@@ -2,6 +2,15 @@
 @section('content')
     <div class="container-fluid">
 
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Sub Kategori</h1>
@@ -26,21 +35,24 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                       <tbody>
-                        @foreach ($subcategory as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->subcategory_name }}</td>
-                                <td>{{ $item->category->category_name }}</td>
-                                <td>{{ Str::substr($item->subcategory_desc, 0, 100) }}...</td>
-                                <td><img src="{{ Storage::url($item->subcategory_image) }}" alt="{{ $item->subcategory_image }}" width="100px" height="100px"></td>
-                                <td>
-                                    <a href="/subcategory-edit/{{ $item->subcategory_id }}" class="btn btn-warning">Edit</a>
-                                    <a href="/subcategory-delete/{{ $item->subcategory_id }}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                       </tbody>
+                        <tbody>
+                            @foreach ($subcategory as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->subcategory_name }}</td>
+                                    <td>{{ $item->category->category_name }}</td>
+                                    <td>{{ Str::substr($item->subcategory_desc, 0, 100) }}...</td>
+                                    <td><img src="{{ Storage::url($item->subcategory_image) }}"
+                                            alt="{{ $item->subcategory_image }}" width="100px" height="100px"></td>
+                                    <td>
+                                        <a href="/subcategory-edit/{{ $item->subcategory_id }}"
+                                            class="btn btn-warning">Edit</a>
+                                        <a href="/subcategory-delete/{{ $item->subcategory_id }}"
+                                            class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

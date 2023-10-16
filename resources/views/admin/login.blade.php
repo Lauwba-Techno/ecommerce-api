@@ -32,12 +32,22 @@
             <div class="col-xl-10 col-lg-12 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
+
+                    @if (session('errors'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('errors')->first() }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-flex align-items-center justify-content-center">
-                                <img src="{{ asset('startbootstrap') }}/img/kai.png"
-                                    alt="{{ asset('startbootstrap') }}/img/kai.png">
+                                <img src="{{ asset('startbootstrap') }}/img/logo.jfif" height="200px"
+                                    alt="{{ asset('startbootstrap') }}/img/logo.jfif">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -48,8 +58,8 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username"
-                                                name="username" aria-describedby="emailHelp"
-                                                placeholder="Enter Username...">
+                                                name="username" aria-describedby="username"
+                                                value="{{ old('username') }}" placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password"
