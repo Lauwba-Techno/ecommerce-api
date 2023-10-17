@@ -6,18 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $category = Category::all();
+        $category->transform(function ($item) {
+            $item->category_image = Storage::url($item->category_image);
+            return $item;
+        });
         return new PostResource(true, "Data berhasil didapat", $category);
-
     }
 
     public function show(Category $category)
     {
+        $category->transform(function ($item) {
+            $item->category_image = Storage::url($item->category_image);
+            return $item;
+        });
         return new PostResource(true, "Data berhasil didapat", $category);
     }
 }

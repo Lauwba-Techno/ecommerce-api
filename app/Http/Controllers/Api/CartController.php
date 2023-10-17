@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
 {
     public function index(Request $request)
     {
         $cart = Cart::where('user_id', $request->user_id)->get();
+        $cart->transform(function ($item) {
+            $item->product->product_image = Storage::url($item->product->product_image);
+            return $item;
+        });
         return new PostResource(true, "Data berhasil didapat", $cart);
     }
 
@@ -25,15 +30,19 @@ class CartController extends Controller
 
         $cart = Cart::create($where);
 
-        if($cart){
+        if ($cart) {
             return new PostResource(true, "Data berhasil ditambahkan", $cart);
-        }else{
+        } else {
             return new PostResource(false, "Data gagal ditambahkan", []);
         }
     }
 
     public function show(Cart $cart)
     {
+        $cart->transform(function ($item) {
+            $item->product->product_image = Storage::url($item->product->product_image);
+            return $item;
+        });
         return new PostResource(true, "Data berhasil didapat", $cart);
     }
 
@@ -58,6 +67,5 @@ class CartController extends Controller
         } else {
             return new PostResource(false, "Data gagal dihapus", []);
         }
-
     }
 }
