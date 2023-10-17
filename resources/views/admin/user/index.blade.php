@@ -13,16 +13,16 @@
                 <h6 class="m-0 font-weight-bold text-primary">Table User</h6>
             </div>
             <div class="card-body">
-                <form class="user" action="/user-update/{{ $user->user_id }}" method="POST" >
+                <form class="user" action="/user-update/{{ $user->user_id }}" method="POST">
                     @csrf
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="fullname" name="fullname" value="{{ $user->fullname }}"
-                                placeholder="Fullname">
+                            <input type="text" class="form-control form-control-user" id="fullname" name="fullname"
+                                value="{{ $user->fullname }}" placeholder="Fullname">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="username" name="username" value="{{ $user->username }}"
-                                placeholder="Username">
+                            <input type="text" class="form-control form-control-user" id="username" name="username"
+                                value="{{ $user->username }}" placeholder="Username">
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,6 +36,5 @@
                 </form>
             </div>
         </div>
-
     </div>
 @endsection

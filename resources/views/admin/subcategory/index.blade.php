@@ -45,7 +45,8 @@
                                     <td><img class="object-fit-cover border rounded"
                                             src="{{ Storage::url($item->subcategory_image) }}"
                                             alt="{{ $item->subcategory_image }}" width="100px !important"
-                                            height="100px !important"></td>
+                                            height="100px !important" style="object-fit: cover; object-position: center;">
+                                    </td>
                                     <td>
                                         <a href="/subcategory-edit/{{ $item->subcategory_id }}"
                                             class="btn btn-warning">Edit</a>

@@ -39,7 +39,8 @@
                                     <td><img class="object-fit-cover border rounded"
                                             src="{{ Storage::url($item->carousel_image) }}"
                                             alt="{{ $item->carousel_image }}" width="100px !important"
-                                            height="100px !important"></td>
+                                            height="100px !important" style="object-fit: cover; object-position: center;">
+                                    </td>
                                     <td>
                                         <a href="/carousel-edit/{{ $item->carousel_id }}" class="btn btn-warning">Edit</a>
                                         <a href="/carousel-delete/{{ $item->carousel_id }}"

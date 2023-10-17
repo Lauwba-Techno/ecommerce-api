@@ -11,6 +11,9 @@
 
     <title>Ecommerce</title>
 
+    <link rel="shortcut icon" href="{{ asset('startbootstrap') }}/img/logo.jfif" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('startbootstrap') }}/img/logo.jfif" type="image/png" />
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('startbootstrap') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

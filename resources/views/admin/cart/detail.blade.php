@@ -22,8 +22,10 @@
                             </tr>
                             <tr>
                                 <th>Gambar</th>
-                                <td><img class="object-fit-cover border rounded" src="{{ Storage::url($cart->product->product_image) }}"
-                                        alt="{{ $cart->product->product_image }}" width="100px !important" height="100px !important"></td>
+                                <td><img class="object-fit-cover border rounded"
+                                        src="{{ Storage::url($cart->product->product_image) }}"
+                                        alt="{{ $cart->product->product_image }}" width="100px !important"
+                                        height="100px !important" style="object-fit: cover; object-position: center;"></td>
                             </tr>
                             <tr>
                                 <th>Jumlah</th>

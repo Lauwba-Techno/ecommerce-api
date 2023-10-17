@@ -46,8 +46,10 @@
                                     <td>{{ $item->product_stock }}</td>
                                     <td>{{ $item->product_price }}</td>
                                     <td>{{ Str::substr($item->product_desc, 0, 100) }}...</td>
-                                    <td><img class="object-fit-cover border rounded" src="{{ Storage::url($item->product_image) }}" alt="{{ $item->product_image }}"
-                                            width="100px !important" height="100px !important"></td>
+                                    <td><img class="object-fit-cover border rounded"
+                                            src="{{ Storage::url($item->product_image) }}" alt="{{ $item->product_image }}"
+                                            width="100px !important" height="100px !important"
+                                            style="object-fit: cover; object-position: center;"></td>
                                     <td>
                                         <a href="/product-edit/{{ $item->product_id }}" class="btn btn-warning">Edit</a>
                                         <a href="/product-delete/{{ $item->product_id }}" class="btn btn-danger">Delete</a>
