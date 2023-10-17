@@ -34,20 +34,24 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                       <tbody>
-                        @foreach ($category as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->category_name }}</td>
-                                <td>{{ Str::substr($item->category_desc, 0, 100) }}...</td>
-                                <td><img src="{{ Storage::url($item->category_image) }}" alt="{{ $item->category_image }}" width="100px" height="100px"></td>
-                                <td>
-                                    <a href="/category-edit/{{ $item->category_id }}" class="btn btn-warning">Edit</a>
-                                    <a href="/category-delete/{{ $item->category_id }}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                       </tbody>
+                        <tbody>
+                            @foreach ($category as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->category_name }}</td>
+                                    <td>{{ Str::substr($item->category_desc, 0, 100) }}...</td>
+                                    <td><img class="object-fit-cover border rounded"
+                                            src="{{ Storage::url($item->category_image) }}"
+                                            alt="{{ $item->category_image }}" width="100px !important"
+                                            height="100px !important"></td>
+                                    <td>
+                                        <a href="/category-edit/{{ $item->category_id }}" class="btn btn-warning">Edit</a>
+                                        <a href="/category-delete/{{ $item->category_id }}"
+                                            class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

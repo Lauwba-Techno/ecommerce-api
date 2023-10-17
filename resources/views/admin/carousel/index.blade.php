@@ -10,7 +10,7 @@
                 </button>
             </div>
         @endif
-        
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Carousel</h1>
@@ -36,8 +36,10 @@
                             @foreach ($carousel as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><img src="{{ Storage::url($item->carousel_image) }}"
-                                            alt="{{ $item->carousel_image }}" width="100px" height="100px"></td>
+                                    <td><img class="object-fit-cover border rounded"
+                                            src="{{ Storage::url($item->carousel_image) }}"
+                                            alt="{{ $item->carousel_image }}" width="100px !important"
+                                            height="100px !important"></td>
                                     <td>
                                         <a href="/carousel-edit/{{ $item->carousel_id }}" class="btn btn-warning">Edit</a>
                                         <a href="/carousel-delete/{{ $item->carousel_id }}"

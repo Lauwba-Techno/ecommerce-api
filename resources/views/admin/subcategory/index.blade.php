@@ -42,8 +42,10 @@
                                     <td>{{ $item->subcategory_name }}</td>
                                     <td>{{ $item->category->category_name }}</td>
                                     <td>{{ Str::substr($item->subcategory_desc, 0, 100) }}...</td>
-                                    <td><img src="{{ Storage::url($item->subcategory_image) }}"
-                                            alt="{{ $item->subcategory_image }}" width="100px" height="100px"></td>
+                                    <td><img class="object-fit-cover border rounded"
+                                            src="{{ Storage::url($item->subcategory_image) }}"
+                                            alt="{{ $item->subcategory_image }}" width="100px !important"
+                                            height="100px !important"></td>
                                     <td>
                                         <a href="/subcategory-edit/{{ $item->subcategory_id }}"
                                             class="btn btn-warning">Edit</a>

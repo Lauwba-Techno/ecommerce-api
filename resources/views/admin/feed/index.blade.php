@@ -42,8 +42,8 @@
                                     <td>{{ $item->feed_title }}</td>
                                     <td>{{ $item->feed_category }}</td>
                                     <td>{{ Str::substr($item->feed_desc, 0, 100) }}...</td>
-                                    <td><img src="{{ Storage::url($item->feed_image) }}" alt="{{ $item->feed_image }}"
-                                            width="100px" height="100px"></td>
+                                    <td><img class="object-fit-cover border rounded" src="{{ Storage::url($item->feed_image) }}" alt="{{ $item->feed_image }}"
+                                           width="100px !important" height="100px !important"></td>
                                     <td>
                                         <a href="/feed-edit/{{ $item->feed_id }}" class="btn btn-warning">Edit</a>
                                         <a href="/feed-delete/{{ $item->feed_id }}" class="btn btn-danger">Delete</a>

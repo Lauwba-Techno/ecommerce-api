@@ -40,8 +40,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->help_name }}</td>
                                     <td>{{ Str::substr($item->help_desc, 0, 100) }}...</td>
-                                    <td><img src="{{ Storage::url($item->help_image) }}" alt="{{ $item->help_image }}"
-                                            width="100px" height="100px"></td>
+                                    <td><img class="object-fit-cover border rounded" src="{{ Storage::url($item->help_image) }}" alt="{{ $item->help_image }}"
+                                            width="100px !important" height="100px !important"></td>
                                     <td>
                                         <a href="/help-edit/{{ $item->help_id }}" class="btn btn-warning">Edit</a>
                                         <a href="/help-delete/{{ $item->help_id }}" class="btn btn-danger">Delete</a>
