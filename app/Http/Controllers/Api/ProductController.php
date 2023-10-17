@@ -22,10 +22,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->transform(function ($item) {
-            $item->product_image = Storage::url($item->product_image);
-            return $item;
-        });
+        $product->product_image = Storage::url($product->product_image);
         return new PostResource(true, "Data berhasil didapat", $product);
     }
 }

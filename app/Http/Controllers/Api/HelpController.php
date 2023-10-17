@@ -22,10 +22,7 @@ class HelpController extends Controller
 
     public function show(Help $help)
     {
-        $help->transform(function ($item) {
-            $item->help_image = Storage::url($item->help_image);
-            return $item;
-        });
+        $help->help_image = Storage::url($help->help_image);
         return new PostResource(true, "Data berhasil didapat", $help);
     }
 }

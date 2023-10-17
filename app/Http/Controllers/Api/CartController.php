@@ -39,10 +39,7 @@ class CartController extends Controller
 
     public function show(Cart $cart)
     {
-        $cart->transform(function ($item) {
-            $item->product->product_image = Storage::url($item->product->product_image);
-            return $item;
-        });
+        $cart->product->product_image = Storage::url($cart->product->product_image);
         return new PostResource(true, "Data berhasil didapat", $cart);
     }
 

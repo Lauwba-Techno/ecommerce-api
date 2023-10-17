@@ -22,10 +22,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->transform(function ($item) {
-            $item->category_image = Storage::url($item->category_image);
-            return $item;
-        });
+        $category->category_image = Storage::url($category->category_image);
         return new PostResource(true, "Data berhasil didapat", $category);
     }
 }

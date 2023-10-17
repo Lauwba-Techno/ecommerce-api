@@ -22,10 +22,7 @@ class SubcategoryController extends Controller
 
     public function show(Subcategory $subcategory)
     {
-        $subcategory->transform(function ($item) {
-            $item->subcategory_image = Storage::url($item->subcategory_image);
-            return $item;
-        });
+        $subcategory->subcategory_image = Storage::url($subcategory->subcategory_image);
         return new PostResource(true, "Data berhasil didapat", $subcategory);
     }
 }
