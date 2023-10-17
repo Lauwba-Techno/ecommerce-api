@@ -11,6 +11,9 @@
 
     <title>Ecommerce</title>
 
+    <link rel="shortcut icon" href="{{ asset('startbootstrap') }}/img/logo.jfif" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('startbootstrap') }}/img/logo.jfif" type="image/png" />
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('startbootstrap') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -24,7 +27,8 @@
     <link href="{{ asset('startbootstrap') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top">
