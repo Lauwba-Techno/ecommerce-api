@@ -14,7 +14,7 @@ class HelpController extends Controller
     {
         $help = Help::all();
         $help->transform(function ($item) {
-            $item->help_image = Storage::url($item->help_image);
+            $item->help_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->help_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $help);
@@ -22,7 +22,7 @@ class HelpController extends Controller
 
     public function show(Help $help)
     {
-        $help->help_image = Storage::url($help->help_image);
+        $help->help_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($help->help_image);
         return new PostResource(true, "Data berhasil didapat", $help);
     }
 }

@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $cart = Cart::where('user_id', $request->user_id)->get();
         $cart->transform(function ($item) {
-            $item->product->product_image = Storage::url($item->product->product_image);
+            $item->product->product_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->product->product_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $cart);
@@ -39,7 +39,7 @@ class CartController extends Controller
 
     public function show(Cart $cart)
     {
-        $cart->product->product_image = Storage::url($cart->product->product_image);
+        $cart->product->product_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($cart->product->product_image);
         return new PostResource(true, "Data berhasil didapat", $cart);
     }
 

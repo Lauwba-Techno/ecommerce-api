@@ -14,7 +14,7 @@ class FeedController extends Controller
     {
         $feed = Feed::all();
         $feed->transform(function ($item) {
-            $item->feed_image = Storage::url($item->feed_image);
+            $item->feed_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->feed_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $feed);

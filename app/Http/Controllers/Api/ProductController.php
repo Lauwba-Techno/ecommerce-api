@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $product = Product::all();
         $product->transform(function ($item) {
-            $item->product_image = Storage::url($item->product_image);
+            $item->product_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->product_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $product);
@@ -22,7 +22,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->product_image = Storage::url($product->product_image);
+        $product->product_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($product->product_image);
         return new PostResource(true, "Data berhasil didapat", $product);
     }
 }

@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $category = Category::all();
         $category->transform(function ($item) {
-            $item->category_image = Storage::url($item->category_image);
+            $item->category_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->category_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $category);
@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->category_image = Storage::url($category->category_image);
+        $category->category_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($category->category_image);
         return new PostResource(true, "Data berhasil didapat", $category);
     }
 }

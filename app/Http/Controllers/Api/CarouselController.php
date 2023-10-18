@@ -14,7 +14,7 @@ class CarouselController extends Controller
     {
         $carousel = Carousel::all();
         $carousel->transform(function ($item) {
-            $item->carousel_image = Storage::url($item->carousel_image);
+            $item->carousel_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->carousel_image);
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $carousel);
