@@ -22,7 +22,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'fullname' => 'required',
-            'username' => 'required',
+            'email' => 'required|email',
         ]);
 
         if ($validator->fails()) {
@@ -31,7 +31,7 @@ class UserController extends Controller
 
         $data = [
             'fullname' => $request->fullname,
-            'username' => $request->username,
+            'email' => $request->email,
         ];
 
         if ($request->password) {
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function authentication(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
 

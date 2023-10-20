@@ -14,7 +14,11 @@ class CategoryController extends Controller
     {
         $category = Category::all();
         $category->transform(function ($item) {
-            $item->category_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($item->category_image);
+            $item->category_image = env('APP_URL') . Storage::url($item->category_image);
+            $item->subcategory->transform(function ($data) {
+                $data->subcategory_image = env('APP_URL') . Storage::url($data->subcategory_image);
+                return $data;
+            });
             return $item;
         });
         return new PostResource(true, "Data berhasil didapat", $category);
@@ -22,7 +26,10 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->category_image = 'https://ecommerce.pkl-lauwba.com/' . Storage::url($category->category_image);
+        $category->subcategory->transform(function ($item) {
+            $item->subcategory_image = env('APP_URL') . Storage::url($item->subcategory_image);
+            return $item;
+        });
         return new PostResource(true, "Data berhasil didapat", $category);
     }
 }

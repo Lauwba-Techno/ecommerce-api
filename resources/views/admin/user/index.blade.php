@@ -21,8 +21,8 @@
                                 value="{{ $user->fullname }}" placeholder="Fullname">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="username" name="username"
-                                value="{{ $user->username }}" placeholder="Username">
+                            <input type="email" class="form-control form-control-user" id="email" name="email"
+                                value="{{ $user->email }}" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">

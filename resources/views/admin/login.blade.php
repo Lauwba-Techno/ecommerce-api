@@ -60,9 +60,9 @@
                                     <form class="user" action="/login" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="username"
-                                                name="username" aria-describedby="username"
-                                                value="{{ old('username') }}" placeholder="Enter Username...">
+                                            <input type="email" class="form-control form-control-user" id="email"
+                                                name="email" aria-describedby="email" value="{{ old('email') }}"
+                                                placeholder="Enter Email...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password"

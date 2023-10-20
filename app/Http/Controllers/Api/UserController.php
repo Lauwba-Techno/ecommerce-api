@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fullname' => 'required|string',
-            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:60',
         ]);
 
@@ -25,13 +25,13 @@ class UserController extends Controller
 
         $user = User::create([
             'fullname' => $request->fullname,
-            'username' => $request->username,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        if($user){
+        if ($user) {
             return new PostResource(true, "Registrasi berhasil", $user);
-        }else{
+        } else {
             return new PostResource(false, "Registrasi gagal", []);
         }
     }
@@ -39,7 +39,7 @@ class UserController extends Controller
     public function authentication(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
+            'email' => 'required|email',
             'password' => 'required|string|min:6|max:60',
         ]);
 
@@ -47,7 +47,7 @@ class UserController extends Controller
             return new PostResource(false, "Login gagal", []);
         }
 
-        if ($user = User::where('username', $request->username)->first()) {
+        if ($user = User::where('email', $request->email)->first()) {
             if (!Hash::check($request->password, $user->password)) {
                 return new PostResource(false, "Invalid Password.", $user);
             }
