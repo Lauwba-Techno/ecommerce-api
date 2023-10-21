@@ -53,7 +53,7 @@ class UserController extends Controller
             }
             return new PostResource(true, "Login berhasil", $user);
         } else {
-            return new PostResource(false, "Email Address not found", $user);
+            return new PostResource(false, "Email Address not found", []);
         }
     }
 }

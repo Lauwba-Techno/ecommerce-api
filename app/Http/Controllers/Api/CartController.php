@@ -25,7 +25,7 @@ class CartController extends Controller
         $where = [
             'user_id' => $request->user_id,
             'product_id' => $request->product_id,
-            'quantity' => 1
+            'quantity' => $request->quantity
         ];
 
         $cart = Cart::create($where);
@@ -60,7 +60,7 @@ class CartController extends Controller
     {
         $cart->delete();
         if ($cart) {
-            return new PostResource(true, "Data berhasil dihapus", $cart);
+            return new PostResource(true, "Data berhasil dihapus", 'success');
         } else {
             return new PostResource(false, "Data gagal dihapus", []);
         }

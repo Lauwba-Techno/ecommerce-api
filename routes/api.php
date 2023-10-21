@@ -57,7 +57,7 @@ Route::get('product', [ProductController::class, 'index']);
 Route::get('product/{product}', [ProductController::class, 'show']);
 
 // cart
-Route::get('cart', [CartController::class, 'index']);
+Route::get('cart/{user_id}', [CartController::class, 'index']);
 Route::get('cart/{cart}', [CartController::class, 'show']);
 Route::post('cart-add', [CartController::class, 'store']);
 Route::post('cart-update/{cart}', [CartController::class, 'update']);
