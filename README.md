@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 <h1>Getting Started</h1>
-<hr><hr>
+
 <h5>Open Terminal and Type Command :</h5>
 <h5>1. Composer Update</h5>
 <h5>2. cp .env.example .env</h5>
